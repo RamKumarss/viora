@@ -1,14 +1,14 @@
 import { View, Button, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 
-export default function IndexScreen() {
+export default function StartCallScreen() {
   const router = useRouter();
 
   return (
     <View style={styles.container}>
       <Button
-        title='Start Chat'
-        onPress={() => router.push('/chat')}
+        title='Start Call'
+        onPress={() => router.push('/call')}
       />
     </View>
   );
