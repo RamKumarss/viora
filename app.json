@@ -1,16 +1,19 @@
 {
   "expo": {
-    "name": "bookmysaloon",
+    "name": "viora",
     "slug": "bookmysaloon",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "bookmysaloon",
+    "scheme": "viora",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.bookmysaloon"
+      "bundleIdentifier": "com.anonymous.viora",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "softwareKeyboardLayoutMode": "resize",
@@ -25,7 +28,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.anonymous.bookmysaloon"
+      "package": "com.anonymous.viora"
     },
     "web": {
       "bundler": "metro",
@@ -52,6 +55,7 @@
       "eas": {
         "projectId": "988a7255-422d-4758-be7c-d302a496b0a4"
       }
-    }
+    },
+    "owner": "ramkumarss"
   }
 }

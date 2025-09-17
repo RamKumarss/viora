@@ -1,4 +1,4 @@
-package com.anonymous.bookmysaloon
+package com.anonymous.viora
 
 import android.app.Application
 import android.content.res.Configuration

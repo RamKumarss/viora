@@ -1,3 +1,4 @@
+import { VideoStream } from '@/components/VideoStream';
 import { Camera } from 'expo-camera';
 import React, { useEffect, useState } from 'react';
 import {
@@ -6,14 +7,17 @@ import {
   Linking,
   StyleSheet,
   Text,
-  View
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import { MediaStream, RTCView, mediaDevices } from 'react-native-webrtc';
 
 export default function CallScreen() {
-  const [stream, setStream] = useState<MediaStream | null>(null);
+  const [localStream, setLocalStream] = useState<MediaStream | null>(null);
   const [permissionDenied, setPermissionDenied] = useState(false);
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
+  const [isMuted, setIsMuted] = useState(false);
+  const [isVideoOn, setIsVideoOn] = useState(true);
 
   const openAppSettings = async () => {
     try {
@@ -32,6 +36,22 @@ export default function CallScreen() {
         { text: 'Open Settings', onPress: openAppSettings },
       ]
     );
+  };
+
+  const toggleMute = () => {
+    if (!localStream) return;
+    localStream
+      .getAudioTracks()
+      .forEach((track: any) => (track.enabled = !track.enabled));
+    setIsMuted(!isMuted);
+  };
+
+  const toggleVideo = () => {
+    if (!localStream) return;
+    localStream
+      .getVideoTracks()
+      .forEach((track: any) => (track.enabled = !track.enabled));
+    setIsVideoOn(!isVideoOn);
   };
 
   useEffect(() => {
@@ -57,8 +77,8 @@ export default function CallScreen() {
     requestPermissions();
 
     return () => {
-      if (stream) {
-        stream.release();
+      if (localStream) {
+        localStream.release();
       }
     };
   }, []);
@@ -69,7 +89,7 @@ export default function CallScreen() {
         audio: true,
         video: true,
       });
-      setStream(newStream);
+      setLocalStream(newStream);
       setPermissionDenied(false);
     } catch (error) {
       console.error('Error starting stream:', error);
@@ -96,15 +116,25 @@ export default function CallScreen() {
 
   return (
     <View style={styles.container}>
-      {stream ? (
-        <RTCView
-          streamURL={stream.toURL()}
-          style={styles.video}
-          objectFit='cover'
-        />
+      {localStream ? (
+        <VideoStream streamURL={localStream.toURL()} isSelf/>
       ) : (
         <Text>Loading stream...</Text>
       )}
+
+      <View style={styles.controls}>
+        <TouchableOpacity onPress={toggleMute} style={styles.button}>
+          <Text style={styles.buttonText}>{isMuted ? 'Unmute' : 'Mute'}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={toggleVideo} style={styles.button}>
+          <Text style={styles.buttonText}>
+            {isVideoOn ? 'Video Off' : 'Video On'}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, { backgroundColor: 'red' }]}>
+          <Text style={styles.buttonText}>End</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -116,8 +146,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  video: {
+  // container: { flex: 1, backgroundColor: 'black' },
+  controls: {
+    position: 'absolute',
+    bottom: 40,
     width: '100%',
-    height: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
+  button: {
+    padding: 15,
+    borderRadius: 50,
+    backgroundColor: '#333',
+  },
+  buttonText: { color: 'white', fontSize: 16 },
 });

@@ -31,13 +31,13 @@ export const VideoStream: React.FC<VideoStreamProps> = ({ streamURL, isSelf }) =
         isSelf ? [styles.selfVideo, { transform: pan.getTranslateTransform() }] : styles.otherVideo,
       ]}
     >
-      <View><Text>Videonstream</Text></View>
       <RTCView
         streamURL={streamURL}
         style={styles.video}
         objectFit="cover"
         mirror={isSelf}
       />
+      
     </Animated.View>
   );
 };

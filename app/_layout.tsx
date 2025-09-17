@@ -78,7 +78,7 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <View style={{ paddingTop: 40, flex: 1 }}>
+      <View style={{ flex: 1 }}>
         <Stack>
           <Stack.Screen
             name='(tabs)'

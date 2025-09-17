@@ -87,9 +87,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.anonymous.bookmysaloon'
+    namespace 'com.anonymous.viora'
     defaultConfig {
-        applicationId 'com.anonymous.bookmysaloon'
+        applicationId 'com.anonymous.viora'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -30,14 +30,6 @@ type Message = {
 
 const initialMessages: Message[] = [
   { id: '1', text: 'Whats up buddy?', sender: 'other' },
-  { id: '2', text: 'Whats up buddy?', sender: 'other' },
-  { id: '3', text: 'Whats up buddy?', sender: 'other' },
-  { id: '4', text: 'Whats up buddy?', sender: 'other' },
-  { id: '5', text: 'Whats up buddy?', sender: 'other' },
-  { id: '6', text: 'Whats up buddy?', sender: 'other' },
-  { id: '7', text: 'Whats up buddy?', sender: 'other' },
-  { id: '8', text: 'Whats up buddy?', sender: 'other' },
-  { id: '9', text: 'Whats up buddy?', sender: 'other' },
 ];
 
 export const options = {

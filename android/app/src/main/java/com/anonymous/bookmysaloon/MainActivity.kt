@@ -1,4 +1,4 @@
-package com.anonymous.bookmysaloon
+package com.anonymous.viora
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build
